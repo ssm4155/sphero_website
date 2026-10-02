@@ -1,0 +1,14 @@
+{
+  "name": "sphero-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SPHERO marketing site (prebuilt static pages served by a small Node server)",
+  "main": "server.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
