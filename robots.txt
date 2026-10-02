@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /start/
+Disallow: /sign-in/
+Disallow: /api/
+
+Sitemap: https://sphero.si/sitemap.xml
