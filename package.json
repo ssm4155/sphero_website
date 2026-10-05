@@ -1,12 +1,11 @@
 {
   "name": "sphero-website",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
-  "description": "SPHERO marketing site (prebuilt static pages served by a small Node server)",
-  "main": "server.mjs",
-  "type": "module",
+  "description": "SPHERO marketing site: prebuilt static pages served by a small dependency-free Node server",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.mjs"
+    "start": "node server.js"
   },
   "engines": {
     "node": ">=18"
