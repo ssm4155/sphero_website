@@ -5,3 +5,22 @@
 .cta-nav{white-space:nowrap}
 @media (max-width:640px){.s-navr>a{display:none}}
 html,body{overflow-x:clip}
+
+/* --- mobile menu fix: backdrop-filter on the header made it the containing block for the
+   fixed menu sheet, collapsing the sheet into the 68px header. The blur now lives on a
+   pseudo-element, so the sheet is positioned against the viewport again. --- */
+.s-nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:none}
+.s-nav::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(5,10,18,.94),rgba(5,10,18,.6) 72%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+@media (max-width:980px){
+  .s-burger summary{position:relative;z-index:2}
+  .s-burger[open] summary{border-color:var(--azure);color:var(--ink)}
+  .s-sheet{position:fixed;top:68px;left:0;right:0;bottom:0;height:auto;z-index:65;background:var(--night);border-top:1px solid var(--line);padding:.5rem 1.5rem calc(2rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:0;overflow-y:auto;overscroll-behavior:contain}
+  .s-sheet a{display:block;padding:1.05rem 0;border-bottom:1px solid var(--line);font-size:1.2rem;color:var(--ink)}
+  .s-sheet a:active{color:var(--azure)}
+  body:has(.s-burger[open]){overflow:hidden}
+  body:has(.s-burger[open]) .s-mbar{display:none}
+}
+/* hero text never slides up under the header on short phone screens */
+@media (max-width:860px){
+  .scroll-scrub .scroll-scrub__chapter-pin,.scroll-scrub .scroll-scrub__chapter[data-align=right] .scroll-scrub__chapter-pin{align-items:flex-start;align-items:safe flex-end;padding-top:calc(68px + 1.5rem)}
+}
