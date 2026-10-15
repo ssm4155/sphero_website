@@ -58,6 +58,19 @@ const SECURITY = {
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
 };
 
+// Pages that now live in the product. Clicks inside the site reach the app through the
+// route chunks; direct loads, bookmarks and search results are sent on from here.
+const APP_URL = "https://app.sphero.si/";
+const REDIRECTS = {
+  "/sign-in": APP_URL,
+  "/start": APP_URL + "?mode=signup",
+};
+
+function redirectFor(pathname) {
+  const page = pathname.replace(/\/(index\.html)?$/, "") || "/";
+  return REDIRECTS[page] || null;
+}
+
 const gzCache = new Map();
 
 function send(res, status, headers, body) {
@@ -188,6 +201,8 @@ const server = http.createServer(async (req, res) => {
     if (req.method !== "GET" && req.method !== "HEAD") {
       return send(res, 405, { "Content-Type": "text/plain; charset=utf-8" }, "Method not allowed");
     }
+    const target = redirectFor(url.pathname);
+    if (target) return send(res, 302, { Location: target, "Cache-Control": "no-store" });
     return await serveStatic(req, res, url.pathname);
   } catch (err) {
     console.error("[sphero] request failed:", err);
